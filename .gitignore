@@ -10,7 +10,8 @@
 .DS_Store
 
 # PhpStorm
-.idea
+.idea/*
+
 
 # Sublime Text
 *.sublime-*
