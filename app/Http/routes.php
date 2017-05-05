@@ -16,11 +16,24 @@ Route::get('/', function () {
 });
 
 
-Route::get('/events','EventController@showEvents');
-Route::get('/preachings','PreachingController@showPreachings');
+Route::get('/events', 'EventController@showEvents');
+Route::get('/preachings', 'PreachingController@showPreachings');
 
 //API
-Route::get('/api/v1/{table}','BaseController@retrieveList');
+
+
+Route::group(['prefix' => 'api/v1'], function () {
+
+
+    Route::get('{table}/{id?}', 'BaseController@issueGetRequest');
+    //Events
+    Route::post('events', 'BaseController@createEvent');
+    Route::put('events/{id}', 'BaseController@updateEvent');
+    //EventGoers
+    Route::post('eventgoers', 'BaseController@createEventGoer');
+    Route::put('eventgoers/{id}', 'BaseController@updateEventGoer');
+
+});
 
 Route::get('/php', function () {
     return phpinfo();
