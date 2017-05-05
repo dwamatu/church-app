@@ -27,11 +27,17 @@ Route::group(['prefix' => 'api/v1'], function () {
 
     Route::get('{table}/{id?}', 'BaseController@issueGetRequest');
     //Events
-    Route::post('events', 'BaseController@createEvent');
-    Route::put('events/{id}', 'BaseController@updateEvent');
+    Route::post('events', 'EventController@createEvent');
+    Route::put('events/{id}', 'EventController@updateEvent');
     //EventGoers
-    Route::post('eventgoers', 'BaseController@createEventGoer');
-    Route::put('eventgoers/{id}', 'BaseController@updateEventGoer');
+    Route::post('eventgoers', 'EventGoerController@createEventGoer');
+    Route::put('eventgoers/{id}', 'EventGoerController@updateEventGoer');
+    //Prayers
+    Route::post('prayers', 'PrayerController@createPrayer');
+    Route::put('prayers/{id}', 'PrayerController@updatePrayer');
+    //Preachings
+    Route::post('preachings', 'PreachingController@createPreaching');
+    Route::put('preachings/{id}', 'PreachingController@updatePreaching');
 
 });
 

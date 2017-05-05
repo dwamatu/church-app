@@ -62,4 +62,7 @@ class EventGoersTest extends TestCase
 
     }
 
+    //TODO add functionality/validation that the event_id exists.
+
+
 }
