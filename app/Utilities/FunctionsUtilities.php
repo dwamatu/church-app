@@ -152,4 +152,23 @@ class FunctionsUtilities
     {
         return DB::table($resource)->where('testimony_id', $resource_id)->update($params);
     }
+
+    public static function SaveTestimonyLiker($resource, $params)
+    {
+        $params = array(
+            'test_id' => isset($params['test_id']) && !empty($params['test_id']) ? $params['test_id'] : 0,
+            'user_email' => isset($params['user_email']) && !empty($params['user_email']) ? $params['user_email'] : 0,
+            'like_date' => isset($params['like_date']) && !empty($params['like_date']) ? $params['like_date'] : 0,
+            'liked' => isset($params['liked']) && !empty($params['liked']) ? $params['liked'] : 0,
+
+        );
+        $execQuery = self::ExecQuery($resource, $params);
+
+        return $execQuery;
+    }
+
+    public static function UpdateTestimonyLiker($resource, $params, $resource_id)
+    {
+        return DB::table($resource)->where('test_id', $resource_id)->update($params);
+    }
 }
