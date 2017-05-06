@@ -6,6 +6,8 @@ use App\Event;
 use App\EventGoer;
 use App\Prayer;
 use App\Preaching;
+use App\Testimony;
+use App\TestimonyLiker;
 use App\Utilities\FunctionsUtilities;
 use Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -63,6 +65,8 @@ class BaseController extends Controller
             'preachings' => Preaching::class,
             'eventgoers' => EventGoer::class,
             'prayers' => Prayer::class,
+            'testimonies' => Testimony::class,
+            'testimonylikers' => TestimonyLiker::class,
 
         ];
 

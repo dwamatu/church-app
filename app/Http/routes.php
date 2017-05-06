@@ -38,6 +38,13 @@ Route::group(['prefix' => 'api/v1'], function () {
     //Preachings
     Route::post('preachings', 'PreachingController@createPreaching');
     Route::put('preachings/{id}', 'PreachingController@updatePreaching');
+    //Testimonies
+    Route::post('testimonies', 'TestimonyController@createTestimony');
+    Route::put('testimonies/{id}', 'TestimonyController@updateTestimony');
+
+    //TestimonyLikers
+    Route::post('testimonylikers', 'TestimonyLikersController@createTestimonyLiker');
+    Route::put('testimonylikers/{id}', 'TestimonyLikersController@updateTestimonyLiker');
 
 });
 
