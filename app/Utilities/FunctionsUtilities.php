@@ -129,4 +129,27 @@ class FunctionsUtilities
         return DB::table($resource)->where('preaching_id', $resource_id)->update($params);
 
     }
+
+    public static function SaveTestimony($resource, $params)
+    {
+        $params = array(
+            'testimony_id' => isset($params['testimony_id']) && !empty($params['testimony_id']) ? $params['testimony_id'] : 0,
+            'testimony_title' => isset($params['testimony_title']) && !empty($params['testimony_title']) ? $params['testimony_title'] : 0,
+            'testimony_desc' => isset($params['testimony_desc']) && !empty($params['testimony_desc']) ? $params['testimony_desc'] : 0,
+            'testimony_time' => isset($params['testimony_time']) && !empty($params['testimony_time']) ? $params['testimony_time'] : 0,
+            'tstatus' => isset($params['tstatus']) && !empty($params['tstatus']) ? $params['tstatus'] : 0,
+            'user' => isset($params['user']) && !empty($params['user']) ? $params['user'] : 0,
+            'likes' => isset($params['likes']) && !empty($params['likes']) ? $params['likes'] : 0,
+            'shares' => isset($params['shares']) && !empty($params['shares']) ? $params['shares'] : 0,
+
+        );
+        $execQuery = self::ExecQuery($resource, $params);
+
+        return $execQuery;
+    }
+
+    public static function UpdateTestimony($resource, $params, $resource_id)
+    {
+        return DB::table($resource)->where('testimony_id', $resource_id)->update($params);
+    }
 }
