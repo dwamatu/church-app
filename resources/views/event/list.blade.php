@@ -21,34 +21,43 @@
                 </ol>
             </section>
 
-            <section class="content">
-                <table id="events-grid" class="display" cellspacing="0" width="100%">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Venue</th>
-                        <th>Time To</th>
-                        <th>Time From</th>
-                        <th>Description</th>
-                        <th>Duration</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tfoot>
-                    <tr>
-                        <th>Name</th>
-                        <th>Venue</th>
-                        <th>Time To</th>
-                        <th>Time From</th>
-                        <th>Description</th>
-                        <th>Duration</th>
-                        <th>Actions</th>
-                    </tr>
-                    </tfoot>
-                    <tbody>
-                    </tbody>
-                </table>
-            </section>
+            <div class="content">
+                <div class="padd invoice">
+                    <div class="row taller-10" style="margin-bottom: 10px">
+                        <div class="col-md-12">
+                            <a class="btn btn-primary" type="button">Add Event</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <table id="events-grid" class="table table-bordered table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Venue</th>
+                                <th>Time To</th>
+                                <th>Time From</th>
+                                <th>Description</th>
+                                <th>Duration</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Venue</th>
+                                <th>Time To</th>
+                                <th>Time From</th>
+                                <th>Description</th>
+                                <th>Duration</th>
+                                <th>Actions</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
             <!-- /.content -->
         </div>
 
@@ -64,14 +73,14 @@
 
     (function () {
 
-        var url = "/api/v1/events";
+        var url = "/fetch/events";
 
         $('#events-grid').dataTable({
             dom: "<'row table-controls'<'col-sm-3 col-md-3 page-length'l><'col-sm-6 col-md-6 search'f><'col-sm-3 col-md-3 text-right'>><'row'<'col-md-12'tr>><'row space-up-10'<'col-md-6'i><'col-md-6'p>>",
             language: {"search": "", "loadingRecords": "Please wait, loading data ..."},
             serverSide: false,
             destroy: true,
-            processing:true,
+            processing: true,
             ordering: false,
             ajax: url,
             columns: [
