@@ -17,7 +17,13 @@ Route::get('/', function () {
 
 
 Route::get('/events', 'EventController@showEvents');
+Route::get('/fetch/events', 'EventController@fetchEvents');
+
 Route::get('/preachings', 'PreachingController@showPreachings');
+Route::get('/add/preachings',['as' => 'add.preaching', 'uses' => 'PreachingController@addPreachings']) ;
+Route::post('/fetch/preachings', 'PreachingController@fetchPreachings');
+Route::get('/preaching/create', 'PreachingController@createPreaching');
+
 
 //API
 
