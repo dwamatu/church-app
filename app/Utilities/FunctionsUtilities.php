@@ -73,7 +73,7 @@ class FunctionsUtilities
 
 
         $responceCollection->put('iTotal', $iTotal);
-        $responceCollection->put('iFilteredTotal', $iFilteredTotal);
+        $responceCollection->put('iFilteredTotal', $iTotal);
         $responceCollection->put('results', $results);
 
 
