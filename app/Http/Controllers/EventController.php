@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Utilities\ApiUtilities;
 use App\Utilities\FunctionsUtilities;
 use Illuminate\Http\Request;
 
@@ -48,7 +49,7 @@ class EventController extends Controller
                 //retrieve record id
                 $record_id = FunctionsUtilities::SaveEvent($resource, $params);
                 //create response
-                $this->response["resource"] = BaseController->fetchOne($resource, $record_id);
+                $this->response["resource"] = BaseController::fetchOne($resource, $record_id);
                 //return response
             }
         } else {
@@ -110,5 +111,13 @@ class EventController extends Controller
     }
 
     //</editor-fold>
+
+    public function fetchEvents(){
+        $url = '/api/v1/events' ;
+
+        $apiResponse = json_decode(ApiUtilities::IssueGETRequest(ApiUtilities::MakeAPIURL($url)),true)['results'];
+
+        return array('data' => $apiResponse);
+    }
 
 }
