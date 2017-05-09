@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Preaching;
+use App\Utilities\ApiUtilities;
+use App\Utilities\FileUtilities;
 use App\Utilities\FunctionsUtilities;
+use App\Utilities\ServerSideUtilities;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -19,6 +22,12 @@ class PreachingController extends Controller
         $pageData->put("page_title", "Preachings");
         return view('preachings.list', ['pageData' => $pageData->toArray()]);
     }
+    public function addPreachings()
+    {
+        $pageData = collect();
+        $pageData->put("page_title", "Add Preachings");
+        return view('preachings.create', ['pageData' => $pageData->toArray()]);
+    }
 
     //<editor-fold desc="Prayers">
     private function validatePreachingCreate($content)
@@ -33,8 +42,20 @@ class PreachingController extends Controller
 
     public function createPreaching(Request $request)
     {
+        $resource = 'preachings';
         //retrieve all parametes
-        $params = $request->all();
+        $params = $request->only(['preached_on', 'by', 'streams', 'downloads', 'likes']);
+
+        \Log::info('creatingPreaching::request', [$params]);
+
+        $file = $request->file('title');
+
+        $filename = $request->file('title')->getClientOriginalName();
+        //LOGGING
+        $params['title'] = $filename;
+
+
+        \Log::info('creatingPreaching::request', [$params]);
 
         //Validate Event Name is unique
         $validator = Validator::make($params, array(
@@ -45,9 +66,10 @@ class PreachingController extends Controller
         if ($validator->passes()) {
             //validate required parameters are provided
             if (self::validatePreachingCreate($params)) {
-                $resource = 'preachings';
+
                 //retrieve record id
                 $record_id = FunctionsUtilities::SavePreaching($resource, $params);
+                FileUtilities::storeFile($resource,$record_id, $file,$filename);
                 //create response
                 $this->response['resource'] = BaseController::fetchOne($resource, $record_id);
                 //return response
@@ -55,7 +77,9 @@ class PreachingController extends Controller
         } else {
             $this->response['errors'] = "Preaching Details required";
         }
-        return $this->response;
+
+        return redirect('/preachings');
+
     }
 
 
@@ -110,4 +134,28 @@ class PreachingController extends Controller
 
     }
     //</editor-fold>
+
+    public function fetchPreachings(Request $request){
+
+
+
+        // Get DataTables server side parameters
+        $pageIndex = $request['start'];
+        $draw = $request['draw'];
+        $pageLength = $request['length'];
+        $q = $request['search']['value'];
+
+        $currentpageIndex = (int)(((int)$pageIndex) / ((int)$pageLength));
+        $pageIndex = $currentpageIndex;
+
+        $url = ApiUtilities::MakeAPIURL("/api/v1/preachings?pageSize=$pageLength&offSet=$pageIndex");
+
+        $apiResponse = ServerSideUtilities::getBasicServerSideData($draw, $url);
+
+        return  $apiResponse;
+    }
+
+
+
+
 }
