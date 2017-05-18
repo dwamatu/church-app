@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: black
- * Date: 04/05/2017
- * Time: 12:39
- */
 
 namespace App\Utilities;
 
@@ -54,7 +48,7 @@ class FunctionsUtilities
         return DB::table($resource)->where('r_id', $resource_id)->update($params);
     }
 
-    public static function fetchList($table, $pageSize = null, $offset = null, $all = null)
+    public static function fetchList($table, $pageSize = null, $offset = null, $all = null,$q=null)
     {
 
         $responceCollection = collect([]);
@@ -65,10 +59,14 @@ class FunctionsUtilities
         } else if (isset($pageSize) && !empty($offset)) {
 
             $results = DB::table($table)->skip($offset)->take($pageSize)->get();
+        }else if(isset($q))
+        {
+            $results = DB::table($table)->where()->get();
         } else {
             $results = DB::table($table)->skip(0)->take(10)->get();
 
         }
+
         $iFilteredTotal = count($results);
 
 
