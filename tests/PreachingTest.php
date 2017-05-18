@@ -25,14 +25,14 @@ class PreachingTest extends TestCase
         $this->get('/api/v1/preachings/1')->assertResponseStatus(200)->seeJsonStructure(['resource']);
         $this->get('/api/v1/preachings/1000')->assertResponseStatus(200)->seeJsonStructure(['errors']);
 
-        $this->json('POST', '/api/v1/preachings', [
-            "title" => $file,
-            "preached_on" => $faker->text(30),
-            "by" => $faker->name,
-            "streams" => $faker->time,
-            "downloads" => $faker->name,
-            "likes" => $faker->name,
-        ])->assertResponseStatus(200)->seeJson(['resource' =>['preaching_id']]);
+//        $this->json('POST', '/api/v1/preachings', [
+//            "title" => $file,
+//            "preached_on" => $faker->text(30),
+//            "by" => $faker->name,
+//            "streams" => $faker->time,
+//            "downloads" => $faker->name,
+//            "likes" => $faker->name,
+//        ])->assertResponseStatus(200)->seeJson(['resource' =>['preaching_id']]);
 
         $this->json('PUT', '/api/v1/preachings/1000', [
             "preaching_id" =>  1000,
