@@ -28,12 +28,13 @@ class BaseController extends Controller
 
     //<editor-fold desc="Issue Get Request">
     //
-    public function issueGetRequest(Request $request, $table, $id = null)
+    public function issueGetRequest(Request $request, $table, $id = null,$q=null)
     {
 
         $pageSize = $request->query('pageSize');
         $offSet = $request->query('offSet');
         $all = $request->query('all');
+        $q = $request->query('q');
 
 
         if (Schema::hasTable($table)) {
@@ -46,7 +47,7 @@ class BaseController extends Controller
                     $this->response['resource'] = $data;
                 }
             } else {
-                $this->response = FunctionsUtilities::fetchList($table,$pageSize,$offSet,$all);
+                $this->response = FunctionsUtilities::fetchList($table,$pageSize,$offSet,$all,$q);
 
             }
             return $this->response;
