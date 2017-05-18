@@ -25,35 +25,75 @@
                 <div class="padd invoice">
                     <div class="row taller-10" style="margin-bottom: 10px">
                         <div class="col-md-12">
-                            <a class="btn btn-primary" type="button">Add Event</a>
+                            <a class="btn btn-primary pull-right" type="button">Add Event</a>
                         </div>
                     </div>
                     <div class="row">
+
+                        <ul class="timeline">
+
+                            <!-- timeline time label -->
+                            <li class="time-label">
+        <span class="bg-red">
+              Events
+        </span>
+                            </li>
+                            <!-- /.timeline-label -->
+
+                            <!-- timeline item -->
+                            <li>
+                                <!-- timeline icon -->
+                                <i class="fa fa-envelope bg-blue"></i>
+
+                                @foreach($pageData['events'] as $event)
+                                <div class="timeline-item">
+
+                                    <span class="time"><i class="fa fa-clock-o"></i> {{$event['tfrom']}} </span>
+
+
+                                    <h3 class="timeline-header"><a href="#">{{$event['ename']}}</a> ...</h3>
+
+                                    <div class="timeline-body">
+                                        ...
+                                        {{$event['des']}}
+
+                                        <img src="http://placehold.it/150x100" alt="..." class="margin">
+                                    </div>
+
+                                    <div class="timeline-footer">
+                                        <a class="btn btn-primary btn-xs">Update</a>
+                                    </div>
+                                </div>
+                                    @endforeach
+                            </li>
+                            <!-- END timeline item -->
+
+                        </ul>
                         <table id="events-grid" class="table table-bordered table-striped table-bordered table-hover" cellspacing="0" width="100%">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Venue</th>
-                                <th>Time To</th>
-                                <th>Time From</th>
-                                <th>Description</th>
-                                <th>Duration</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tfoot>
-                            <tr>
-                                <th>Name</th>
-                                <th>Venue</th>
-                                <th>Time To</th>
-                                <th>Time From</th>
-                                <th>Description</th>
-                                <th>Duration</th>
-                                <th>Actions</th>
-                            </tr>
-                            </tfoot>
-                            <tbody>
-                            </tbody>
+                        <thead>
+                        <tr>
+                        <th>Name</th>
+                        <th>Venue</th>
+                        <th>Time To</th>
+                        <th>Time From</th>
+                        <th>Description</th>
+                        <th>Duration</th>
+                        <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                        <th>Name</th>
+                        <th>Venue</th>
+                        <th>Time To</th>
+                        <th>Time From</th>
+                        <th>Description</th>
+                        <th>Duration</th>
+                        <th>Actions</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        </tbody>
                         </table>
                     </div>
                 </div>
