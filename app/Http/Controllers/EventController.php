@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\EventGoer;
 use App\Utilities\ApiUtilities;
 use App\Utilities\FunctionsUtilities;
 use Illuminate\Http\Request;
@@ -15,8 +16,11 @@ class EventController extends Controller
 
     public function showEvents()
     {
+        $events  = Event::all();
         $pageData = collect();
         $pageData->put("page_title", "Events");
+        $pageData->put("events", $events);
+
         return view('event.list', ['pageData' => $pageData->toArray()]);
     }
 
