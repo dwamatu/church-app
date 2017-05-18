@@ -11,16 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
-
 
 Route::get('/events', 'EventController@showEvents');
 Route::get('/fetch/events', 'EventController@fetchEvents');
 
 Route::get('/preachings', 'PreachingController@showPreachings');
-Route::get('/add/preachings',['as' => 'add.preaching', 'uses' => 'PreachingController@addPreachings']) ;
+Route::get('/add/preachings', ['as' => 'add.preaching', 'uses' => 'PreachingController@addPreachings']);
 Route::post('/fetch/preachings', 'PreachingController@fetchPreachings');
 Route::get('/preaching/create', 'PreachingController@createPreaching');
 
@@ -57,3 +53,16 @@ Route::group(['prefix' => 'api/v1'], function () {
 Route::get('/php', function () {
     return phpinfo();
 });
+
+
+Route::auth();
+
+
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/home', 'HomeController@index');
+    Route::get('/', function () {
+        return view('dashboard');
+    });
+});
+
